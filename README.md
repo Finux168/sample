@@ -1,2 +1,3 @@
-# sample
-一些简单的例子
+# java-sample
+## include:
+  - singleton
