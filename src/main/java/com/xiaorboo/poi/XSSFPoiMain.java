@@ -1,12 +1,11 @@
 package com.xiaorboo.poi;
 
+import java.io.File;
 import java.io.FileOutputStream;
+import java.util.Iterator;
 import java.util.Random;
 
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellReference;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFCell;
@@ -29,6 +28,8 @@ public class XSSFPoiMain {
 //        writeXlsxWithBitsofData();
         //写入大量数据
 //        writeXlsxWithBigData();
+        //读取少量数据
+        readXlsxWithBitsofData();
     }
 
     /**
@@ -83,14 +84,47 @@ public class XSSFPoiMain {
     /**
      * 读取少量数据的excel
      */
-    public static void readXlsxWithBitsofData(){
+    public static void readXlsxWithBitsofData() throws Exception {
         //使用 WorkbookFactory.create() 创建合适的 HSSFWorkbook 或者 XSSFWorkbook.然后读取即可
+        File xlsxFile = new File("Temp.xlsx");
+        Workbook workbook = WorkbookFactory.create(xlsxFile);
+        Sheet sheet = workbook.getSheetAt(0);
+        Iterator<Row> rowIterator = sheet.rowIterator();
+        while (rowIterator.hasNext()){
+            Row row = rowIterator.next();
+            System.out.print("第"+row.getRowNum()+"行数据:");
+            Iterator<Cell> cellIterator = row.cellIterator();
+            while (cellIterator.hasNext()){
+                Cell cell = cellIterator.next();
+                Object obj;
+                switch (cell.getCellType()) {
+                    case BOOLEAN:
+                        obj = cell.getBooleanCellValue();
+                        break;
+                    case ERROR:
+                        obj = cell.getErrorCellValue();
+                        break;
+                    case NUMERIC:
+                        obj = cell.getNumericCellValue();
+                        break;
+                    case STRING:
+                        obj = cell.getStringCellValue();
+                        break;
+                    default:
+                        obj = "";
+                        break;
+                }
+                System.out.print(obj.toString()+"\t");
+            }
+            System.out.println();
+        }
+        workbook.close();
     }
 
     /**
      * 读取大量数据的excel
      */
-    public static void readXlsxWithBigData(){
+    public static void readXlsxWithBigData() throws Exception {
         //为了避免内存溢出,官方建议将 excel 转成 csv 再读取.
     }
 }
