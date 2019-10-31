@@ -16,6 +16,9 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 /**
  * .xlsx(excel 2007以上的版本)的excel文件操作
  *
+ * 操作excel的类可以根据模板设计模式设计成一个模板类(类似spring中的jdbctemplate,restTemplate等)
+ * 将创建workbook以及关闭workbook等公共操作封装到父类中,子类实现具体的业务逻辑即可.
+ *
  * @Author: fgd
  * @Date: 2019-10-24
  */
@@ -29,7 +32,9 @@ public class XSSFPoiMain {
         //写入大量数据
 //        writeXlsxWithBigData();
         //读取少量数据
-        readXlsxWithBitsofData();
+//        readXlsxWithBitsofData();
+        //读取大量数据
+        readXlsxWithBigData();
     }
 
     /**
