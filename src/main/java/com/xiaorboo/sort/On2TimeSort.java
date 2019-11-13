@@ -23,6 +23,11 @@ public class On2TimeSort {
         System.out.println(Arrays.toString(arr));
     }
 
+    /**
+     * 冒泡排序
+     *
+     * @param arr 待排序的数组
+     */
     public static void bubbleSort(int[] arr){
         for (int i = 0; i < arr.length; i++) {
             for (int j = i+1; j < arr.length; j++) {
@@ -35,6 +40,12 @@ public class On2TimeSort {
         }
     }
 
+    /**
+     * 插入排序
+     *
+     * @param arr 待排序的数组
+     * @return
+     */
     public static int[] insertSort(int[] arr){
         int[] nArr = new int[arr.length];
         nArr[0] = arr[0];
