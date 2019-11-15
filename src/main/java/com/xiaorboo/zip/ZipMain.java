@@ -14,12 +14,12 @@ public class ZipMain {
 
     public static void main(String[] args) throws Exception{
         //需要打包的文件
-        FileInputStream fileInputStream = new FileInputStream("/Users/fgd/Desktop/2.pdf");
+        FileInputStream fileInputStream = new FileInputStream("/Users/fgd/Desktop/nginx.conf");
         //压缩后的文件流
         FileOutputStream fileOutputStream = new FileOutputStream("/Users/fgd/Desktop/2.zip");
         ZipOutputStream zipOutputStream = new ZipOutputStream(fileOutputStream);
         //压缩文件内的每一个文件以及名字
-        zipOutputStream.putNextEntry(new ZipEntry("2.pdf"));
+        zipOutputStream.putNextEntry(new ZipEntry("2.conf"));
         int len;
         byte[] buf = new byte[1024];
         while ((len = fileInputStream.read(buf)) != -1){
